@@ -10,8 +10,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.common.keys import Keys
-
 
 
 class Test_Project:
@@ -22,14 +20,16 @@ class Test_Project:
       self.driver.maximize_window()
       yield
       self.driver.close()
-# login testing
+      
+# Testcase 1:login testing with valid password
+   
    def test_login_success(self, startup):
       self.driver.get(data.Data().url)
       try:
          cookie_before=self.driver.get_cookies()[0]['value']
          self.driver.implicitly_wait(10)
          self.driver.find_element(By.XPATH,locators.Locators().username_input_box).send_keys(data.Data().username)
-         self.driver.find_element(By.XPATH,locators.Locators().password_input_box).send_keys(data.Data().valid_password )
+         self.driver.find_element(By.XPATH,locators.Locators().password_input_box).send_keys(data.Data().valid_password)
          self.driver.find_element(By.XPATH,locators.Locators().submit_button).click()
          cookie_after=self.driver.get_cookies()[0]['value']
          assert cookie_before != cookie_after
@@ -37,7 +37,8 @@ class Test_Project:
       except:
          print("element missing")
         
-    
+# Testcase 2:login testing with Invalid password 
+   
    def test_login_failure(self, startup):
       self.driver.get(data.Data().url)
       self.wait=WebDriverWait(self.driver,20)
@@ -46,7 +47,7 @@ class Test_Project:
          cookie_before=self.driver.get_cookies()[0]['value']
          self.driver.implicitly_wait(10)
          self.driver.find_element(By.XPATH,locators.Locators().username_input_box).send_keys(data.Data().username)
-         self.driver.find_element(By.XPATH,locators.Locators().password_input_box).send_keys(data.Data().invalid_password )
+         self.driver.find_element(By.XPATH,locators.Locators().password_input_box).send_keys(data.Data().invalid_password)
          self.driver.find_element(By.XPATH,locators.Locators().submit_button).click()
          cookie_after=self.driver.get_cookies()[0]['value']
          assert cookie_before == cookie_after
@@ -54,7 +55,7 @@ class Test_Project:
       except:
          print("element missing")
 
-        
+ # Testcase 3:Adding and Creating a login page for Employee     
 
    def test_add_newemp(self,startup):
       self.wait=WebDriverWait(self.driver,10)
@@ -64,13 +65,19 @@ class Test_Project:
          self.driver.find_element(By.XPATH,locators.Locators().username_input_box).send_keys(data.Data().username)
          self.driver.find_element(By.XPATH,locators.Locators().password_input_box).send_keys(data.Data().valid_password)
          self.driver.find_element(By.XPATH,locators.Locators().submit_button).click()
+         
+         # Navigating to PIM tab
          self.driver.find_element(By.XPATH,locators.pimloc().pim).click()
+
+         # Adding a new Employee 
          self.driver.find_element(By.XPATH,locators.pimloc().add).click()
          self.wait.until(EC.presence_of_element_located((By.XPATH,locators.pimloc().fname))).send_keys(data.pim1().first_name)
          self.wait.until(EC.presence_of_element_located((By.XPATH,locators.pimloc().mname))).send_keys(data.pim1().mid_name)
          self.wait.until(EC.presence_of_element_located((By.XPATH,locators.pimloc().lname))).send_keys(data.pim1().last_name)
          save_btn=self.wait.until(EC.element_to_be_clickable((By.XPATH,locators.pimloc().save)))
          save_btn.click()
+
+         # Creating a Details for an Employee
          self.wait.until(EC.presence_of_element_located((By.XPATH,locators.pimloc().nick))).send_keys(data.pim1().nick_name)
          self.wait.until(EC.presence_of_element_located((By.XPATH,locators.pimloc().license))).send_keys(data.pim1().license_num)
          self.wait.until(EC.presence_of_element_located((By.XPATH,locators.pimloc().other))).send_keys(data.pim1().other_num)
@@ -92,6 +99,8 @@ class Test_Project:
          print("NEW EMPLOYEE SAVED")
       except NoSuchElementException as e:
            print (e)
+         
+# Testcase 4:Editing the existing Employee Details
         
    def test_edit_employee(self,startup):
       self.wait=WebDriverWait(self.driver,15)
@@ -101,12 +110,18 @@ class Test_Project:
          self.driver.find_element(By.XPATH,locators.Locators().username_input_box).send_keys(data.Data().username)
          self.driver.find_element(By.XPATH,locators.Locators().password_input_box).send_keys(data.Data().valid_password)
          self.driver.find_element(By.XPATH,locators.Locators().submit_button).click()
+
+         # Navigating to PIM tab
          self.driver.find_element(By.XPATH,locators.pimloc().pim).click()
          self.wait.until(EC.presence_of_element_located((By.LINK_TEXT,locators.pimloc().emp_list))).click()
+
+         # Searching for an existing Employee Details with Name
          self.wait.until(EC.presence_of_element_located((By.XPATH,locators.pimloc().emp_name))).send_keys(data.pim1().emp_name)
          search_btn=self.wait.until(EC.element_to_be_clickable((By.XPATH,locators.pimloc().search_btn)))
          action=ActionChains(self.driver)
          action.move_to_element(search_btn).click(search_btn).perform()
+
+         # Editing the existing Employee Details 
          edit_btn=self.wait.until(EC.presence_of_element_located((By.XPATH,locators.pimloc().edit)))
          edit_btn.click()
          last_name=self.wait.until(EC.presence_of_element_located((By.XPATH,locators.pimloc().lname)))
@@ -118,6 +133,8 @@ class Test_Project:
          print("EDITED SUCCESSFULLY")
       except TimeoutException as e:
             print (e)
+         
+# Testcase 5:Deleting an Employee Details
 
    def test_delete_employee(self,startup):
       self.wait=WebDriverWait(self.driver,15)
@@ -127,20 +144,24 @@ class Test_Project:
          self.driver.find_element(By.XPATH,locators.Locators().username_input_box).send_keys(data.Data().username)
          self.driver.find_element(By.XPATH,locators.Locators().password_input_box).send_keys(data.Data().valid_password)
          self.driver.find_element(By.XPATH,locators.Locators().submit_button).click()
+
+         # Navigating to PIM tab
          self.driver.find_element(By.XPATH,locators.pimloc().pim).click()
          self.wait.until(EC.presence_of_element_located((By.LINK_TEXT,locators.pimloc().emp_list))).click()
          self.wait.until(EC.presence_of_element_located((By.XPATH,locators.pimloc().emp_name))).send_keys(data.pim1().emp_name)
+
+         # Searching for an existing Employee Details with Name
          search_btn=self.wait.until(EC.presence_of_element_located((By.XPATH,locators.pimloc().search_btn)))
          action=ActionChains(self.driver)
          action.move_to_element(search_btn).click(search_btn).perform()
+
+         # Deleting the existing Employee
          checkbox=self.wait.until(EC.presence_of_element_located((By.XPATH,locators.pimloc().check)))
          checkbox.click()
          delete_btn=self.wait.until(EC.presence_of_element_located((By.XPATH,locators.pimloc().delete)))
          delete_btn.click()
          confirm_delete_btn=self.wait.until(EC.presence_of_element_located((By.XPATH,locators.pimloc().confirm_delete)))
          confirm_delete_btn.click()
-         
          print("DELETED SUCCESSFULLY")
-
       except TimeoutException as e:
             print (e)   
