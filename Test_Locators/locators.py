@@ -1,21 +1,21 @@
 # locators.py
 # To keep the Locators data
 class Locators:
-    username_input_box = "//input[@placeholder='Username']" # NAME
-    password_input_box = "//input[@placeholder='Password']" # NAME
-    submit_button = "//button[@type='submit']" #xpath
+    username_input_box = "//input[@placeholder='Username']" 
+    password_input_box = "//input[@placeholder='Password']" 
+    submit_button = "//button[@type='submit']" 
     invalid_credentials='//*[@id="app"]/div[1]/div/div[1]/div/div[2]/div[2]/div/div[1]/div[1]'
 class pimloc:
-    pim='//*[@id="app"]/div[1]/div[1]/aside/nav/div[2]/ul/li[2]/a'      #xpath
-    add='//*[@id="app"]/div[1]/div[2]/div[2]/div/div[2]/div[1]/button'  #xpath
-    fname='//*[@id="app"]/div[1]/div[2]/div[2]/div/div/form/div[1]/div[2]/div[1]/div[1]/div/div/div[2]/div[1]/div[2]/input'   #xpath                                                
-    mname='//*[@id="app"]/div[1]/div[2]/div[2]/div/div/form/div[1]/div[2]/div[1]/div[1]/div/div/div[2]/div[2]/div[2]/input'   #xpath                                          
-    lname="//input[@placeholder='Last Name']"   #xpath                                                  
-    save='//*[@id="app"]/div[1]/div[2]/div[2]/div/div/form/div[2]/button[2]' #xpath
+    pim='//*[@id="app"]/div[1]/div[1]/aside/nav/div[2]/ul/li[2]/a'      
+    add='//*[@id="app"]/div[1]/div[2]/div[2]/div/div[2]/div[1]/button'  
+    fname='//*[@id="app"]/div[1]/div[2]/div[2]/div/div/form/div[1]/div[2]/div[1]/div[1]/div/div/div[2]/div[1]/div[2]/input'                                               
+    mname='//*[@id="app"]/div[1]/div[2]/div[2]/div/div/form/div[1]/div[2]/div[1]/div[1]/div/div/div[2]/div[2]/div[2]/input'                                             
+    lname="//input[@placeholder='Last Name']"                                                   
+    save='//*[@id="app"]/div[1]/div[2]/div[2]/div/div/form/div[2]/button[2]'
     add_employee='Add Employee' #link
-    emplist='//*[@id="app"]/div[1]/div[2]/div[2]/div/div[1]/div[2]/form/div[1]/div/div[1]/div/div[2]/div/div/input'           #xpath                                       
-    nick='//*[@id="app"]/div[1]/div[2]/div[2]/div/div/div/div[2]/div[1]/form/div[1]/div[2]/div/div/div[2]/input'         #xpath
-    license='//*[@id="app"]/div[1]/div[2]/div[2]/div/div/div/div[2]/div[1]/form/div[2]/div[2]/div[1]/div/div[2]/input'    #xpath
+    emplist='//*[@id="app"]/div[1]/div[2]/div[2]/div/div[1]/div[2]/form/div[1]/div/div[1]/div/div[2]/div/div/input'                                               
+    nick='//*[@id="app"]/div[1]/div[2]/div[2]/div/div/div/div[2]/div[1]/form/div[1]/div[2]/div/div/div[2]/input'         
+    license='//*[@id="app"]/div[1]/div[2]/div[2]/div/div/div/div[2]/div[1]/form/div[2]/div[2]/div[1]/div/div[2]/input'    
     other='//*[@id="app"]/div[1]/div[2]/div[2]/div/div/div/div[2]/div[1]/form/div[2]/div[1]/div[2]/div/div[2]/input'
     ssn='//*[@id="app"]/div[1]/div[2]/div[2]/div/div/div/div[2]/div[1]/form/div[2]/div[3]/div[1]/div/div[2]/input'
     sin='//*[@id="app"]/div[1]/div[2]/div[2]/div/div/div/div[2]/div[1]/form/div[2]/div[3]/div[2]/div/div[2]/input'
