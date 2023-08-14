@@ -148,9 +148,9 @@ class Test_Project:
          # Navigating to PIM tab
          self.driver.find_element(By.XPATH,locators.pimloc().pim).click()
          self.wait.until(EC.presence_of_element_located((By.LINK_TEXT,locators.pimloc().emp_list))).click()
-         self.wait.until(EC.presence_of_element_located((By.XPATH,locators.pimloc().emp_name))).send_keys(data.pim1().emp_name)
 
          # Searching for an existing Employee Details with Name
+         self.wait.until(EC.presence_of_element_located((By.XPATH,locators.pimloc().emp_name))).send_keys(data.pim1().emp_name)
          search_btn=self.wait.until(EC.presence_of_element_located((By.XPATH,locators.pimloc().search_btn)))
          action=ActionChains(self.driver)
          action.move_to_element(search_btn).click(search_btn).perform()
